@@ -1,0 +1,376 @@
+@import url('https://fonts.googleapis.com/css2?family=Creepster&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Nosifer&display=swap');
+
+.visible{
+  display: none;
+}
+
+body {
+  background: url('https://i.gifer.com/1ksL.gif') no-repeat center center fixed; 
+  background-size: cover;
+  font-family: 'Creepster', cursive;
+  color: #ff0000;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  overflow: hidden;
+  position: relative;
+}
+.vhs-overlay {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  opacity: 0.05;
+  pointer-events: none;
+  z-index: 1;
+}
+#memory-indicator{
+  visibility: none;
+  color: #800000;
+}
+
+.calculator-wrapper {
+  position: relative;
+  z-index: 2;
+}
+
+
+.calculator {
+  background-color: #1a0000;
+  padding: 20px;
+  border-radius: 12px;
+  border: 4px solid #8b0000;
+  width: 90%;
+  min-height: 610px;
+  display: grid;
+  grid-template-rows: auto auto 1fr auto;
+  gap: 20px;
+  position: relative;
+  overflow: hidden;
+}
+
+
+.title {
+  text-align: center;
+  font-size: 2.5rem;
+  margin: 10px 0;
+  color: #ff2a2a;
+  text-shadow: 2px 2px #000;
+  font-family: 'Nosifer', cursive;
+}
+
+.row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.display {
+  background: linear-gradient(to bottom, #1a0000, #300000);
+  color: #f5eaea;
+  font-family: 'VT323', 'Nosifer', monospace;
+  font-size: 2rem;
+  text-align: right;
+  padding: 0px 20px;
+  margin: 0px 5px 10px 5px;
+  border: 1px solid #6b0000;
+  border-top: none;
+  border-radius: 8px;
+  height: 75px;
+  width: calc(100% - 10px);
+  overflow-x: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  user-select: none;
+  pointer-events: none;
+  box-shadow: inset 0 0 4px #80000066;
+  box-sizing: border-box;
+}
+
+.buttons {
+  display: grid;
+  grid-template-areas:
+    "mc   m     c     pm    mod   div"
+    "mr   sqrt   seven eight nine  mul"
+    "mp   fact   four  five  six   sub"
+    "mm   power  one   two   three add"
+    "eye  dot    pi  zero  eq     eq";
+  grid-template-columns: repeat(6, 1fr);
+  grid-template-rows: repeat(5, auto);
+  gap: 12px;
+  width: 100%;
+}
+
+.btn {
+  padding: 0;
+  font-size: 1.2rem;
+  border: none;
+  background-color: #330000;
+  color: #ffcccc;
+  border-radius: 6px;
+  transition: all 0.15s ease-in-out;
+  cursor: pointer;
+  box-shadow: 0 0 5px #800000;
+  font-family: 'Nosifer', cursive;
+  letter-spacing: 1px;
+  height: 60px;
+  width: 100%;
+}
+
+.btn:hover {
+  background-color: #660000;
+  color: #fff;
+  transform: scale(1.05) rotate(-1deg);
+}
+
+.op {
+  background-color: #550000;
+}
+
+.equal {
+  background-color: #990000;
+  color: #fff;
+}
+
+/* ЖИВОЙ ГЛАЗ */
+.eye-btn {
+  background: none;
+  border: none;
+  padding: 0;
+  height: 80px;
+  width: 80px;
+  margin: auto;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  overflow: hidden;
+}
+
+.eye-btn img {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  object-fit: cover;
+  animation: eye-pulse 3s infinite ease-in-out;
+  transition: all 0.3s ease-in-out;
+}
+
+.eye-btn:hover img {
+  animation: eye-alert 0.6s infinite alternate ease-in-out;
+  filter: brightness(1.6) contrast(1.6) hue-rotate(20deg) saturate(1.8);
+  transform: scale(1.4);
+}
+
+/* ПУЛЬСАЦИЯ ГЛАЗА */
+@keyframes eye-pulse {
+  0%, 100% {
+    transform: scale(1);
+    filter: brightness(1) contrast(1);
+  }
+  50% {
+    transform: scale(1.2) rotate(1deg);
+    filter: brightness(1.5) contrast(1.4) saturate(1.3);
+  }
+}
+
+/* ДРОЖАНИЕ ГЛАЗА ПРИ НАВЕДЕНИИ */
+@keyframes eye-alert {
+  0%   { transform: scale(1.3) rotate(-2deg); }
+  50%  { transform: scale(1.4) rotate(2deg); }
+  100% { transform: scale(1.3) rotate(-2deg); }
+}
+
+/* ВОЗДЕЙСТВИЕ ГЛАЗА НА СОСЕДНИЕ КНОПКИ */
+.btn[data-action="MC"],
+.btn[data-action="pi"],
+.btn[data-action="MR"],
+.btn[data-action="sqrt"] {
+  animation: ripple-from-eye 3s infinite ease-in-out;
+}
+
+@keyframes ripple-from-eye {
+  0%, 100% {
+    transform: scale(1);
+    filter: brightness(1);
+  }
+  50% {
+    transform: scale(1.05);
+    filter: brightness(1.3) contrast(1.2);
+  }
+}
+
+/* КРОВОПОДТЁК */
+.drip-blood {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  width: 100%;
+  height: 50px;
+  background: url('https://i.gifer.com/YVPK.gif') no-repeat center bottom;
+  background-size: 100% 100%;
+  pointer-events: none;
+  z-index: 10;
+}
+
+/* СКРИМЕРЫ */
+.screamer {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgb(0, 0, 0);
+  display: none;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+}
+
+.screamer img {
+  width: 100vw;
+  height: 100vh;
+  object-fit: cover;
+  animation: flash 0.3s ease-in-out infinite alternate;
+}
+
+@keyframes flash {
+  from { filter: brightness(1); }
+  to { filter: brightness(2.3); }
+}
+
+#path {
+  background-color: #300000;
+  color: #aaa;
+  font-size: 1.1rem;
+  text-align: right;
+  padding: 0px 20px;
+  margin-bottom: 0px;
+  border: 2px solid #500000;
+  border-bottom: none;
+  border-top-right-radius: 8px;
+  border-top-left-radius: 8px;
+  height: 30px;
+  width: 100%;
+  overflow-x: auto;
+  white-space: nowrap;
+  box-sizing: border-box;
+  font-family: monospace;
+}
+
+#memory-indicator {
+  font-size: 1rem;
+  color: #aaa;
+  padding-left: 10px;
+  visibility: hidden;
+}
+
+@keyframes chaos-pulse {
+  0%   { transform: scale(1);     filter: brightness(1); }
+  20%  { transform: scale(1.05);  filter: brightness(1.2); }
+  40%  { transform: scale(0.97);  filter: brightness(1.1); }
+  60%  { transform: scale(1.08);  filter: brightness(1.5); }
+  80%  { transform: scale(1.02);  filter: brightness(1.3); }
+  100% { transform: scale(1);     filter: brightness(1); }
+}
+
+.chaos {
+  animation: chaos-pulse 4s infinite ease-in-out;
+}
+
+.display-area {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  margin-bottom: 25px;
+  padding: 0 5px;
+  box-sizing: border-box;
+  background: linear-gradient(to bottom, #1a0000, #300000);
+  border: 2px solid #4a0000;
+  border-radius: 10px;
+  box-shadow: inset 0 0 8px #660000aa, 0 2px 3px rgba(0, 0, 0, 0.5);
+}
+
+.memory-line {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 32px;
+  padding: 0 12px;
+  background: transparent; /* ← убираем цвет! */
+  border: none;            /* ← убираем рамки! */
+}
+
+#path {
+  flex: 1;
+  border: none;
+  background: transparent;
+  color: #aa8888;
+  font-size: 0.95rem;
+  font-family: monospace;
+  text-align: right;
+  overflow-x: auto;
+  white-space: nowrap;
+}
+
+#memory-indicator {
+  font-size: 0.85rem;
+  color: #aa8888;
+  margin-right: 10px;
+  visibility: hidden;
+  font-family: monospace;
+}
+
+.main-display {
+  background: transparent; /* ← тоже убираем фон */
+  color: #ffeaea;
+  font-family: 'VT323', 'Nosifer', monospace;
+  font-size: 3.2rem;
+  text-align: right;
+  padding: 8px 20px 14px;
+  border: none;
+  height: 85px;
+  width: 100%;
+  box-sizing: border-box;
+  pointer-events: none;
+  user-select: none;
+}
+
+@media (max-width: 700px) {
+  .calculator {
+    width: 95%;
+    padding: 15px;
+    font-size: 0.95rem;
+  }
+
+  .buttons {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(100px, 1fr)) !important;
+    grid-template-areas: none !important;
+    justify-items: center;
+    gap: 12px;
+  }
+
+  .btn {
+    min-width: 100px;
+    max-width: 120px;
+    width: 100%;
+    height: 60px;
+    font-size: 1.1rem;
+  }
+
+  .eye-btn {
+    width: 100px;
+    height: 100px;
+  }
+
+  .main-display {
+    font-size: 2.4rem;
+  }
+
+  .title {
+    font-size: 2.2rem;
+  }
+}

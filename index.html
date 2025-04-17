@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>BloodyCalc</title>
+  <link href="https://fonts.googleapis.com/css2?family=Creepster&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Nosifer&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+  <!-- calc -->
+  <div id="basic-calculator">
+    <div class="vhs-overlay"></div>
+
+    <div class="calculator-wrapper">
+      <div class="calculator">
+        <div class="title">CALCULATOR</div>
+
+        <div class="display-area">
+          <div class="memory-line">
+            <span id="memory-indicator">M</span>
+            <input type="text" id="path" readonly />
+          </div>
+          <input class="main-display" id="display" value="0" readonly />
+        </div>
+
+        <div class="buttons">
+          <button class="btn chaos" style="grid-area: c" onclick="clearDisplay()">C</button>
+          <button class="btn chaos equal" style="grid-area: eq" onclick="calculate()">=</button>
+          <button class="btn chaos" style="grid-area: pm" onclick="sign()">±</button>
+          <button class="btn chaos" style="grid-area: mod" onclick="pers()">%</button>
+          <button class="btn chaos op" style="grid-area: div" onclick="appendToDisplay('/')">÷</button>
+          <button class="btn chaos op" style="grid-area: mul" onclick="appendToDisplay('*')">×</button>
+          <button class="btn chaos op" style="grid-area: sub" onclick="appendToDisplay('-')">−</button>
+          <button class="btn chaos op" style="grid-area: add" onclick="appendToDisplay('+')">+</button>
+
+          <button class="btn chaos" style="grid-area: nine" onclick="appendToDisplay('9')">9</button>
+          <button class="btn chaos" style="grid-area: eight" onclick="appendToDisplay('8')">8</button>
+          <button class="btn chaos" style="grid-area: seven" onclick="appendToDisplay('7')">7</button>
+          <button class="btn chaos" style="grid-area: six" onclick="appendToDisplay('6')">6</button>
+          <button class="btn chaos" style="grid-area: five" onclick="appendToDisplay('5')">5</button>
+          <button class="btn chaos" style="grid-area: four" onclick="appendToDisplay('4')">4</button>
+          <button class="btn chaos" style="grid-area: three" onclick="appendToDisplay('3')">3</button>
+          <button class="btn chaos" style="grid-area: two" onclick="appendToDisplay('2')">2</button>
+          <button class="btn chaos" style="grid-area: one" onclick="appendToDisplay('1')">1</button>
+          <button class="btn chaos zero" style="grid-area: zero" onclick="appendToDisplay('0')">0</button>
+          <button class="btn chaos" style="grid-area: dot" onclick="appendToDisplay('.')">.</button>
+
+          <button class="btn chaos" style="grid-area: sqrt" onclick="sqrt()">√</button>
+          <button class="btn chaos" style="grid-area: fact" onclick="factorial()">x!</button>
+          <button class="btn chaos" style="grid-area: power" onclick="power()">xⁿ</button>
+          <button class="btn chaos" style="grid-area: pi" onclick="pi()">pi</button>
+
+          <button class="eye-btn" style="grid-area: eye" onclick="changeView()">
+            <img src="https://i.gifer.com/TRkX.gif" alt="eye">
+          </button>
+
+          <button class="btn chaos" style="grid-area: mc" onclick="memoryClear()">MC</button>
+          <button class="btn chaos" style="grid-area: m" onclick="showMem()">M</button>
+          <button class="btn chaos" style="grid-area: mr" onclick="memoryRecall()">MR</button>
+          <button class="btn chaos" style="grid-area: mp" onclick="memoryAdd()">M+</button>
+          <button class="btn chaos" style="grid-area: mm" onclick="memorySubtract()">M−</button>
+        </div>
+      </div>
+
+      <div class="drip-blood" id="drip"></div>
+    </div>
+
+    <div class="screamer" id="screamer-zero">
+      <img src="https://i.gifer.com/3EnW.gif" alt="Screamer">
+    </div>
+    <div class="screamer" id="screamer-special">
+      <img src="https://i.gifer.com/7wvG.gif" alt="Screamer">
+    </div>
+  </div>
+
+  <!--***** convertor *****-->
+  <div id="convertor" class="visible">
+    <div class="vhs-overlay"></div>
+    
+    <div class="calculator-wrapper">
+    <div class="calculator">
+      <div class="title">CONVERTER</div>
+
+      <!-- LENGTH -->
+      <div class="double-display">
+        <div class="input-section">
+          <input class="display" id="len-input" placeholder="0">
+          <select id="from-len" class="unit-select">
+            <option value="cm">cm</option>
+            <option value="m">m</option>
+            <option value="km">km</option>
+            <option value="in">in</option>
+            <option value="ft">ft</option>
+            <option value="mi">mi</option>
+          </select>
+        </div>
+        <button class="equal chaos">CONVERT LENGTH</button>
+        <div class="output-section">
+          <input class="display" id="len-output" placeholder="0" disabled>
+          <select id="to-len" class="unit-select">
+            <option value="cm">cm</option>
+            <option value="m">m</option>
+            <option value="km">km</option>
+            <option value="in">in</option>
+            <option value="ft">ft</option>
+            <option value="mi">mi</option>
+          </select>
+        </div>
+      </div>
+
+      <!-- MASS -->
+      <div class="double-display">
+        <div class="input-section">
+          <input class="display" id="mass-input" placeholder="0">
+          <select id="from-mass" class="unit-select">
+            <option value="mg">mg</option>
+            <option value="g">g</option>
+            <option value="kg">kg</option>
+            <option value="lb">lb</option>
+            <option value="oz">oz</option>
+          </select>
+        </div>
+        <button class="equal chaos">CONVERT MASS</button>
+        <div class="output-section">
+          <input class="display" id="mass-output" placeholder="0" disabled>
+          <select id="to-mass" class="unit-select">
+            <option value="mg">mg</option>
+            <option value="g">g</option>
+            <option value="kg">kg</option>
+            <option value="lb">lb</option>
+            <option value="oz">oz</option>
+          </select>
+        </div>
+      </div>
+
+      <!-- AREA -->
+      <div class="double-display">
+        <div class="input-section">
+          <input class="display" id="area-input" placeholder="0">
+          <select id="from-area" class="unit-select">
+            <option value="cm²">cm²</option>
+            <option value="m²">m²</option>
+            <option value="km²">km²</option>
+            <option value="in²">in²</option>
+            <option value="ft²">ft²</option>
+          </select>
+        </div>
+        <button class="equal chaos">CONVERT AREA</button>
+        <div class="output-section">
+          <input class="display" id="area-output" placeholder="0" disabled>
+          <select id="to-area" class="unit-select">
+            <option value="cm²">cm²</option>
+            <option value="m²">m²</option>
+            <option value="km²">km²</option>
+            <option value="in²">in²</option>
+            <option value="ft²">ft²</option>
+          </select>
+        </div>
+      </div>
+
+      <!-- BOTTOM ROW -->
+      <div class="bottom-row">
+        <button class="eye-btn" onclick="changeView()">
+          <img src="https://i.gifer.com/TRkX.gif" alt="eye">
+        </button>
+        <button class="clear-btn">CLEAR</button>
+        <button class="del-btn">DEL</button>
+      </div>
+
+      <div class="drip-blood"></div>
+    </div>
+  </div>
+</div>
+
+  <script src="js/convertor.js"></script>
+  <script src="js/screamer.js"></script>
+  <script src="js/script.js"></script>
+</body>
+</html>  
