@@ -338,39 +338,3 @@ body {
   user-select: none;
 }
 
-@media (max-width: 700px) {
-  .calculator {
-    width: 95%;
-    padding: 15px;
-    font-size: 0.95rem;
-  }
-
-  .buttons {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(100px, 1fr)) !important;
-    grid-template-areas: none !important;
-    justify-items: center;
-    gap: 12px;
-  }
-
-  .btn {
-    min-width: 100px;
-    max-width: 120px;
-    width: 100%;
-    height: 60px;
-    font-size: 1.1rem;
-  }
-
-  .eye-btn {
-    width: 100px;
-    height: 100px;
-  }
-
-  .main-display {
-    font-size: 2.4rem;
-  }
-
-  .title {
-    font-size: 2.2rem;
-  }
-}
